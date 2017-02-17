@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.danlu.dlgateway.persist.dao.DlUriMapper">
+	<resultMap id="BaseResultMap" type="com.danlu.dlgateway.persist.entity.DlUri">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="project_id" property="projectId" jdbcType="VARCHAR" />
+		<result column="uri" property="uri" jdbcType="VARCHAR" />
+		<result column="uri_status" property="uriStatus" jdbcType="VARCHAR" />
+		<result column="method" property="method" jdbcType="VARCHAR" />
+		<result column="target_uri" property="targetUri" jdbcType="VARCHAR" />
+		<result column="target_uri_status" property="targetUriStatus"
+			jdbcType="VARCHAR" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="gmt_update" property="gmtUpdate" jdbcType="TIMESTAMP" />
+		<result column="create_person" property="createPerson"
+			jdbcType="VARCHAR" />
+		<result column="update_person" property="updatePerson"
+			jdbcType="VARCHAR" />
+		<result column="logic_delete_flag" property="logicDeleteFlag"
+			jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="selectByParamsWhere">
+		<where>
+			<if test="projectId != null">
+				project_id = #{projectId,jdbcType=VARCHAR} and
+			</if>
+			<if test="uri != null">
+				uri = #{uri,jdbcType=VARCHAR} and
+			</if>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR} and 
+			</if>
+			<if test="uriStatus != null">
+				uri_status = #{uriStatus,jdbcType=VARCHAR} and 
+			</if>
+			<if test="targetUriStatus !=null">
+				target_uri_status = #{targetUriStatus,jdbcType=VARCHAR} and
+			</if>
+			<if test="method != null">
+				method = #{method,jdbcType=VARCHAR} and
+			</if>
+			logic_delete_flag = 0 and 1 = 1
+		</where>
+	</sql>
+
+	<sql id="Base_Column_List">
+		id, project_id, uri, uri_status, method, target_uri,
+		target_uri_status,
+		gmt_create,
+		gmt_update, create_person, update_person,
+		logic_delete_flag
+	</sql>
+
+	<select id="selectByParamWithPage" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from dl_uri
+		<include refid="selectByParamsWhere" />
+		order by uri desc
+		<if test="page != null and nums != null">
+			limit ${page},${nums}
+		</if>
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from dl_uri
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		update dl_uri
+		set
+		logic_delete_flag =1
+		where id = #{id,jdbcType=VARCHAR} and
+		logic_delete_flag = 0
+	</delete>
+
+	<select id="deleteByIdAndProjectId"  resultType="java.lang.Integer"
+		parameterType="java.util.Map">
+		update dl_uri
+		set logic_delete_flag =1,
+		update_person =#{updatePerson,jdbcType=VARCHAR},
+		gmt_update = now()
+		where project_id
+		=
+		#{projectId,jdbcType=VARCHAR} and id = #{id,jdbcType=VARCHAR} and
+		logic_delete_flag = 0
+	</select>
+
+	<select id="countById" resultType="java.lang.Integer"
+		parameterType="java.util.Map">
+		select count(id) from dl_uri
+		<include refid="selectByParamsWhere" />
+	</select>
+
+	<insert id="insert" parameterType="com.danlu.dlgateway.persist.entity.DlUri">
+		insert into dl_uri (id,
+		project_id, uri,
+		uri_status, method, target_uri,
+		target_uri_status,
+		gmt_create, gmt_update,
+		create_person, update_person, logic_delete_flag
+		)
+		values (#{id,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR},
+		#{uri,jdbcType=VARCHAR},
+		#{uriStatus,jdbcType=VARCHAR},
+		#{method,jdbcType=VARCHAR}, #{targetUri,jdbcType=VARCHAR},
+		#{targetUriStatus,jdbcType=VARCHAR}, now(),
+		now(),
+		#{createPerson,jdbcType=VARCHAR},
+		#{updatePerson,jdbcType=VARCHAR}, 0
+		)
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.danlu.dlgateway.persist.entity.DlUri">
+		update dl_uri
+		<set>
+			<if test="projectId != null">
+				project_id = #{projectId,jdbcType=VARCHAR},
+			</if>
+			<if test="uri != null">
+				uri = #{uri,jdbcType=VARCHAR},
+			</if>
+			<if test="uriStatus != null">
+				uri_status = #{uriStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="method != null">
+				method = #{method,jdbcType=VARCHAR},
+			</if>
+			<if test="targetUri != null">
+				target_uri = #{targetUri,jdbcType=VARCHAR},
+			</if>
+			<if test="targetUriStatus != null">
+				target_uri_status = #{targetUriStatus,jdbcType=VARCHAR},
+			</if>
+			
+				gmt_update = now(),
+			
+				update_person = #{updatePerson,jdbcType=VARCHAR},
+			
+		</set>
+		where id = #{id,jdbcType=VARCHAR} and logic_delete_flag = 0
+	</update>
+	
+</mapper>

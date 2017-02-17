@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>日志文件显示</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src='js/jquery-1.12.3.min.js'></script>
+<script type="text/javascript" src='js/common.js'></script>
+<script type="text/javascript" src='js/jquery.cookie.js'></script>
+<script type="text/javascript" src='js/main.js'></script>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div class="box">
+			<section>
+				<h1>常规日志分析报告</h1>
+				<p>
+					请选择日志分析时间:<input type="date" name="date" id="nowDate" />
+				</p>
+				<span class="notice"></span>
+			</section>
+			<section>
+				<h2>数据概况</h2>
+				<p></p>
+				<table class="pure-table">
+					<tbody id="total">
+						<tr>
+							<th>总访问量</th>
+							<th>PV数</th>
+							<th>UV数</th>
+							<th>独立IP数</th>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section>
+				<h2>IP流量分析(TOP200)</h2>
+				<p>基于IP，分析IP对应地域、访问量、流量消耗</p>
+				<table class="pure-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>IP</th>
+							<th>国家/地区</th>
+							<th>访问次数</th>
+							<th>访问占比%</th>
+
+							<th>访问占比% <span class="r">▼</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody id='Ip'>
+					</tbody>
+				</table>
+				<a href="showMore.html#Ip">查看更多</a>
+			</section>
+			<section>
+				<h2>页面访问分析(TOP200)</h2>
+				<p>页面访问次数、流量消耗</p>
+				<table class="pure-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>URL</th>
+							<th>访问次数</th>
+							<th>访问占比%</th>
+
+							<th>访问占比% <span class="r">▼</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="page">
+
+					</tbody>
+				</table>
+				<a href="showMore.html#page">查看更多</a>
+			</section>
+
+			<section>
+				<h2>操作系统</h2>
+				<p>基于独立用户分析</p>
+				<table class="pure-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>操作系统</th>
+							<th>用户访问次数</th>
+							<th>操作系统占比%</th>
+							<th>操作系统占比% <span class="r">▼</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="os">
+					</tbody>
+				</table>
+				<a href="showMore.html#os">查看更多</a>
+			</section>
+
+			<section>
+				<h2>浏览器</h2>
+				<p>基于独立用户分析</p>
+				<table class="pure-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>浏览器</th>
+							<th>浏览器版本</th>
+							<th>浏览器访问次数</th>
+							<th>浏览器占比%</th>
+							<th>浏览器占比% <span class="r">▼</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="browser">
+					</tbody>
+				</table>
+				<a href="showMore.html#browser">查看更多</a>
+			</section>
+			<section>
+				<h2>公司ID</h2>
+				<p>基于独立用户分析</p>
+				<table class="pure-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>公司ID</th>
+							<th>访问次数</th>
+							<th>访问占比%</th>
+							<th>访问占比% <span class="r">▼</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="company">
+					</tbody>
+				</table>
+				<a href="showMore.html#company">查看更多</a>
+			</section>
+		</div>
+		<div id="toTop">toTop</div>
+	</div>
+
+</body>
+</html>

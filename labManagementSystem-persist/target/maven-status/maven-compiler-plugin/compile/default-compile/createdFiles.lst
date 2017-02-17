@@ -1,0 +1,12 @@
+com\danlu\dlgateway\persist\entity\DlLoadBalance.class
+com\danlu\dlgateway\persist\entity\DlUri.class
+com\danlu\dlgateway\persist\dao\DlLoadBalanceMapper.class
+com\danlu\dlgateway\persist\dao\DlUriMapper.class
+com\danlu\dlgateway\persist\dao\DlWhiteBlackListMapper.class
+com\danlu\dlgateway\persist\entity\DlProject.class
+com\danlu\dlgateway\persist\entity\DlUser.class
+com\danlu\dlgateway\persist\dao\DlUriWhiteBlackListMapper.class
+com\danlu\dlgateway\persist\entity\DlWhiteBlackList.class
+com\danlu\dlgateway\persist\entity\DlUriWhiteBlackList.class
+com\danlu\dlgateway\persist\dao\DlProjectMapper.class
+com\danlu\dlgateway\persist\dao\DlUserMapper.class

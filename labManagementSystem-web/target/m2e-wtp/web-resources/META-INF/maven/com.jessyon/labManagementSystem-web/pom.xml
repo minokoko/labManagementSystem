@@ -1,0 +1,149 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>labManagementSystem-web</artifactId>
+	<name>labManagementSystem-web</name>
+	<!-- 用于管理项目所有的jar 其它组件 用到时直接引用就可以了 -->
+
+	<parent>
+		<groupId>com.jessyon</groupId>
+		<artifactId>labManagementSystem</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+		<relativePath>../labManagementSystem/pom.xml</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.jessyon</groupId>
+			<artifactId>labManagementSystem-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.0.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.22</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>labManagementSystem-web</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>*/*</include>
+					<include>*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+			<!-- 添加此插件以便启动jetty -->
+
+			<!-- <plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.16.v20140903</version>
+				<configuration>
+					<webApp>
+						<contextPath>/</contextPath>
+						<baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+							<resourcesAsCSV>src/main/webapp</resourcesAsCSV>
+						</baseResource>
+					</webApp>
+					<scanIntervalSeconds>0</scanIntervalSeconds>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>8081</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin> -->
+		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>1.0-alpha-6</version>
+			</extension>
+		</extensions>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>jessyon_dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<pom.db.jdbc.url>jdbc:mysql://db.ijessyon.com:3406/dlgateway?useUnicode=true&amp;characterEncoding=UTF-8</pom.db.jdbc.url>
+				<pom.db.jdbc.username>root</pom.db.jdbc.username>
+				<pom.db.jdbc.password>ijessyon</pom.db.jdbc.password>
+				<pom.db.connection_pools.initial_pool_size>5</pom.db.connection_pools.initial_pool_size>
+				<pom.db.connection_pools.min_pool_size>5</pom.db.connection_pools.min_pool_size>
+				<pom.db.connection_pools.max_pool_size>10</pom.db.connection_pools.max_pool_size>
+				<pom.db.connection_pools.max_idle_time>600</pom.db.connection_pools.max_idle_time>
+				<pom.db.connection_pools.acquire_increment>5</pom.db.connection_pools.acquire_increment>
+				<pom.db.connection_pools.checkout_timeout>60000</pom.db.connection_pools.checkout_timeout>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<pom.db.jdbc.url>jdbc:mysql://jessyon2test.mysql.rds.aliyuncs.com:3406/labManagementSystem?useUnicode=true&amp;characterEncoding=UTF-8</pom.db.jdbc.url>
+				<pom.db.jdbc.username>jessyon2_test</pom.db.jdbc.username>
+				<pom.db.jdbc.password>b49d2591f2a0577B</pom.db.jdbc.password>
+				<pom.db.connection_pools.initial_pool_size>5</pom.db.connection_pools.initial_pool_size>
+				<pom.db.connection_pools.min_pool_size>5</pom.db.connection_pools.min_pool_size>
+				<pom.db.connection_pools.max_pool_size>10</pom.db.connection_pools.max_pool_size>
+				<pom.db.connection_pools.max_idle_time>600</pom.db.connection_pools.max_idle_time>
+				<pom.db.connection_pools.acquire_increment>1</pom.db.connection_pools.acquire_increment>
+				<pom.db.connection_pools.checkout_timeout>60000</pom.db.connection_pools.checkout_timeout>
+			</properties>
+		</profile>
+	</profiles>
+
+	<packaging>war</packaging>
+</project>

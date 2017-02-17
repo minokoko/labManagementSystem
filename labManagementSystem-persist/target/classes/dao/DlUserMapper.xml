@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.danlu.dlgateway.persist.dao.DlUserMapper">
+	<resultMap id="BaseResultMap"
+		type="com.danlu.dlgateway.persist.entity.DlUser">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+		<result column="create_person" property="createPerson" jdbcType="VARCHAR" />
+		<result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="gmt_update" property="gmtUpdate" jdbcType="TIMESTAMP" />
+		<result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
+		<result column="logic_delete_flag" property="logicDeleteFlag" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, username, password, user_phone, user_email, create_person, gmt_create, gmt_update,
+		update_person, logic_delete_flag
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from dl_user
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectBySelective" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+		select
+		<include refid="Base_Column_List" />
+		from dl_user
+		where 
+			1 = 1
+		<if test="id !=null and id != ''">
+      		and id != #{id,jdbcType=VARCHAR}
+    	</if>
+    	<if test="username !=null and id != ''">
+      		and username != #{username,jdbcType=VARCHAR}
+    	</if>
+    	<if test="password !=null and id != ''">
+      		and password != #{password,jdbcType=VARCHAR}
+    	</if>
+    	<if test="userPhone !=null and id != ''">
+      		and user_phone != #{userPhone,jdbcType=VARCHAR}
+    	</if>
+    	<if test="userEmail !=null and id != ''">
+      		and user_email != #{userEmail,jdbcType=VARCHAR}
+    	</if>
+    	<if test="createPerson !=null and id != ''">
+      		and create_person != #{createPerson,jdbcType=VARCHAR}
+    	</if>
+    	<if test="gmtCreate !=null and id != ''">
+      		and gmt_create != #{gmtCreate,jdbcType=VARCHAR}
+    	</if>
+    	<if test="gmtUpdate !=null and id != ''">
+      		and gmt_update != #{gmtUpdate,jdbcType=VARCHAR}
+    	</if>
+    	<if test="updatePerson !=null and id != ''">
+      		and update_person != #{updatePerson,jdbcType=VARCHAR}
+    	</if>
+			and logic_delete_flag = #{logicDeleteFlag,jdbcType=INTEGER}
+	</select>
+
+	<insert id="insert" parameterType="com.danlu.dlgateway.persist.entity.DlUser">
+		insert into dl_user (id, username, password,
+		user_phone, user_email, create_person,
+		gmt_create, gmt_update, update_person,
+		logic_delete_flag
+		)
+		values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR},
+		#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtUpdate,jdbcType=TIMESTAMP},
+		#{updatePerson,jdbcType=VARCHAR}, #{logicDeleteFlag,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.danlu.dlgateway.persist.entity.DlUser">
+		insert into dl_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="userPhone != null">
+				user_phone,
+			</if>
+			<if test="userEmail != null">
+				user_email,
+			</if>
+			<if test="createPerson != null">
+				create_person,
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create,
+			</if>
+			<if test="gmtUpdate != null">
+				gmt_update,
+			</if>
+			<if test="updatePerson != null">
+				update_person,
+			</if>
+			logic_delete_flag
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=INTEGER},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				#{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="createPerson != null">
+				#{createPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtUpdate != null">
+				#{gmtUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatePerson != null">
+				#{updatePerson,jdbcType=VARCHAR},
+			</if>
+				#{logicDeleteFlag,jdbcType=INTEGER}
+		</trim>
+	</insert>
+
+
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.danlu.dlgateway.persist.entity.DlUser">
+		update dl_user
+		<set>
+			<if test="username != null">
+				username = #{username,jdbcType=INTEGER},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				user_email = #{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="createPerson != null">
+				create_person = #{createPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtCreate != null">
+				gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtUpdate != null">
+				gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatePerson != null">
+				update_person = #{updatePerson,jdbcType=VARCHAR},
+			</if>
+				logic_delete_flag = #{logicDeleteFlag,jdbcType=INTEGER}
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.danlu.dlgateway.persist.entity.DlUser">
+		update dl_user
+		set username = #{username,jdbcType=INTEGER},
+		password = #{password,jdbcType=VARCHAR},
+		user_phone = #{userPhone,jdbcType=VARCHAR},
+		user_email = #{userEmail,jdbcType=VARCHAR},
+		create_person = #{createPerson,jdbcType=VARCHAR},
+		gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+		gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
+		update_person = #{updatePerson,jdbcType=VARCHAR},
+		logic_delete_flag = #{logicDeleteFlag,jdbcType=INTEGER}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>
