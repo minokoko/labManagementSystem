@@ -19,8 +19,13 @@ public class indexController {
         return "index";
     }
 
-    @RequestMapping(value = "/hello", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE
-                                                                              + ";charset=utf-8")
+    @RequestMapping(value = "/index2")
+    public String showIndex2() {
+        return "index2";
+    }
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE
+                                                                             + ";charset=utf-8")
     @ResponseBody
     public String hello() {
         return "hello";
