@@ -1,10 +1,7 @@
-META-INF\MANIFEST.MF
 com\danlu\dlgateway\persist\entity\DlLoadBalance.class
 com\danlu\dlgateway\persist\entity\DlUri.class
-META-INF\maven\com.jessyon\labManagementSystem-persist\pom.properties
 com\danlu\dlgateway\persist\entity\DlWhiteDenyList.class
 com\danlu\dlgateway\persist\entity\DlProject.class
 com\danlu\dlgateway\persist\entity\DLUriLoadBalance.class
 com\danlu\dlgateway\persist\entity\DlUser.class
 com\danlu\dlgateway\persist\entity\DLActionRecord.class
-META-INF\maven\com.jessyon\labManagementSystem-persist\pom.xml
