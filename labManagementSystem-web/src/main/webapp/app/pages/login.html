@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录页面</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/signin.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="signin">
+		<div class="signin-head"><img src="img/logo.png" alt="logo" ></div>
+		<form class="form-signin" role="form" id="logoForm">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				<input type="text" class="form-control" name="username" id="username" placeholder="用户名" required autofocus />
+			</div>
+			<div id="#userTip"></div>
+				
+
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+				<input type="password" class="form-control" name="password" id="password" placeholder="密码" required />
+			</div>
+			<div id="#pswTip"></div>			
+		</form>
+		<button class="btn btn-lg btn-info btn-block" id="logoBtn">登录</button>
+		<div id="tip"></div>
+	</div>
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/login.js"></script>
+		
+</body>
+</html>
